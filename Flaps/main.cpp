@@ -5,7 +5,7 @@
 int main() 
 {
 
-	sf::RenderWindow win(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "Mr. FLaps");
+	sf::RenderWindow win(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "Flappy bird clone");
 	Game game(win);
 
 
