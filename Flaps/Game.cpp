@@ -12,7 +12,7 @@ struct Sounds {
 	sf::Sound dishk;
 } sounds;
 Game::Game(sf::RenderWindow& window): win(window), is_enter_pressed(false),
-run_game(true),pipe_counter(71), pipe_spawn_time(70),score(0), start_monitoring(false)
+run_game(true),pipe_counter(71), pipe_spawn_time(70),score(0), start_monitoring(false),high_score(0)
 {
 	win.setFramerateLimit(70);
 	bg_texture.loadFromFile("assets/bg.png");
@@ -43,6 +43,12 @@ run_game(true),pipe_counter(71), pipe_spawn_time(70),score(0), start_monitoring(
 	score_text.setFillColor(sf::Color::White);
 	score_text.setPosition(18, 18);
 	score_text.setString("SCORE: 0");
+
+	high_score_text.setFont(font);
+	high_score_text.setCharacterSize(24);
+	high_score_text.setFillColor(sf::Color::White);
+	high_score_text.setPosition(300, 18);
+	high_score_text.setString("HIGH SCORE: 0");
 	Pipes::loadTextures();
 
 	sounds.chingBuffer.loadFromFile("assets/sfx/score.wav");
@@ -109,6 +115,7 @@ void Game::draw()
 	win.draw(ground_sprite1);
 	win.draw(ground_sprite2);
 	win.draw(bird.bird_sprite);
+	win.draw(high_score_text);
 	win.draw(score_text);
 	if (!run_game) {
 		win.draw(restart_text);
@@ -193,6 +200,10 @@ void Game::restartGame()
 	is_enter_pressed = false;
 	pipe_counter = 71;
 	pipes.clear();
+	if (score > high_score) {
+		high_score_text.setString("High Score: " + toString(score));
+		high_score = score;
+	}
 	score = 0;
 	score_text.setString("Score: 0");
 }

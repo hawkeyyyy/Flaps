@@ -19,14 +19,14 @@ private:
 	const int move_speed = 270;
 	void moveGround(sf:: Time&);
 	void doProcessing(sf::Time &dt);
-	int pipe_counter, pipe_spawn_time,score;
+	int pipe_counter, pipe_spawn_time,score,high_score;
 	void checkCollisions();
 	void checkScore();
 	std::vector<Pipes> pipes;
 	std::random_device rd;
 	std::uniform_int_distribution<int> dist{250,550};
 	sf::Font font;
-	sf::Text restart_text,score_text;
+	sf::Text restart_text,score_text,high_score_text;
 	void restartGame();
 	std::string toString(int);
 };
